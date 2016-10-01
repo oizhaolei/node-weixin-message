@@ -29,26 +29,25 @@ $ npm install --save node-weixin-message
 
 ```js
 var nodeWeixinMessage = require('node-weixin-message');
+var messages = nodeWeixinMessage.messages;
 
+function text(message, res, callback, extra) {
+  //message => 解析后的JSON
+  //res => res
+  //callback => callback
+  //extra => 'some data',
+
+  //Extra
+  res.send(message);
+}
+
+//多次侦听相同的回调函数只会被调用一次
+messages.on.text(msg);
+messages.on.image(msg);
+messages.eventon.scan(msg);
 
 //在http请求里的处理方式
 app.get('weixin/text', function(req, res) {
-  var messages = nodeWeixinMessage.messages;
-
-  function text(message, res, callback, extra) {
-    //message => 解析后的JSON
-    //res => res
-    //callback => callback
-    //extra => 'some data',
-
-    //Extra
-    res.send(message);
-  }
-
-  //多次侦听相同的回调函数只会被调用一次
-  messages.on.text(text);
-  messages.on.text(text);
-  messages.on.text(text);
   messages.onXML(req.body, res, function callback(message) {
     //After message handled.
   }
